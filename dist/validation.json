@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-06",
+  "model": "leaky-rate-v1",
+  "defaults": {
+    "preset": "loom",
+    "side": "both",
+    "amplitude": 1,
+    "gain": 3,
+    "duration": 600,
+    "onset": 60,
+    "pulse": 180,
+    "dt": 2,
+    "tau": 20,
+    "mode": "signed",
+    "glutamate": "inhibitory",
+    "silenced": []
+  },
+  "checks": {
+    "data_integrity": "pass",
+    "source_directed_reachability": "pass",
+    "no_input_silence": "pass",
+    "bounded_activity": "pass",
+    "motor_causal_order": "pass",
+    "silencing": "pass",
+    "python_javascript_max_abs_difference": 1.1102230246251565e-16
+  },
+  "results": [
+    {
+      "preset": "loom",
+      "top_motor": "TTMn|R|T2",
+      "peak": 0.03400844786707857,
+      "peak_model_time": 254,
+      "first_above_1e_6": 66,
+      "gf_silenced_peak": 0.009304246734141628,
+      "gf_silenced_change_percent": -72.64136613788693,
+      "active_populations_above_0_001": 230,
+      "glutamate_sensitivity": [
+        {
+          "glutamate": "inhibitory",
+          "top_motor": "TTMn|R|T2",
+          "top_peak": 0.03400844786707857
+        },
+        {
+          "glutamate": "excitatory",
+          "top_motor": "TTMn|R|T2",
+          "top_peak": 0.034382265166188156
+        },
+        {
+          "glutamate": "omit",
+          "top_motor": "TTMn|R|T2",
+          "top_peak": 0.03384223092556376
+        }
+      ]
+    },
+    {
+      "preset": "motion_a",
+      "top_motor": "GNG283|L|",
+      "peak": 0.06237801904151443,
+      "peak_model_time": 244,
+      "first_above_1e_6": 66,
+      "gf_silenced_peak": 0.06237771317464731,
+      "gf_silenced_change_percent": -0.0004903439894676787,
+      "active_populations_above_0_001": 314,
+      "glutamate_sensitivity": [
+        {
+          "glutamate": "inhibitory",
+          "top_motor": "GNG283|L|",
+          "top_peak": 0.06237801904151443
+        },
+        {
+          "glutamate": "excitatory",
+          "top_motor": "GNG283|L|",
+          "top_peak": 0.06852965411028877
+        },
+        {
+          "glutamate": "omit",
+          "top_motor": "GNG283|L|",
+          "top_peak": 0.06591829480820569
+        }
+      ]
+    },
+    {
+      "preset": "motion_b",
+      "top_motor": "GNG283|L|",
+      "peak": 0.03192185922392074,
+      "peak_model_time": 244,
+      "first_above_1e_6": 66,
+      "gf_silenced_peak": 0.03192136661001232,
+      "gf_silenced_change_percent": -0.0015431867704363,
+      "active_populations_above_0_001": 308,
+      "glutamate_sensitivity": [
+        {
+          "glutamate": "inhibitory",
+          "top_motor": "GNG283|L|",
+          "top_peak": 0.03192185922392074
+        },
+        {
+          "glutamate": "excitatory",
+          "top_motor": "GNG652|L|",
+          "top_peak": 0.03669241715773158
+        },
+        {
+          "glutamate": "omit",
+          "top_motor": "GNG283|L|",
+          "top_peak": 0.0339178050195491
+        }
+      ]
+    }
+  ],
+  "limitation": "Numerical and structural checks only. No physiological or behavioral validation. Browser visual/end-to-end QA was not performed."
+}

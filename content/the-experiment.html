@@ -1,0 +1,33 @@
+<p class="lead">The central question is simple: given measured neural connections, what activity and movement follow from an input, and which parts of the result depend on the circuit we chose to model?</p>
+
+<h2 id="the-question">An experiment in sensory-to-motor transformation</h2>
+<p>Imagine an object approaching a resting fly. Its image occupies more of the visual field. Somewhere between that changing sensory signal and a movement, neural populations receive input, combine it, and influence motor circuits.</p>
+<p>This project makes that chain inspectable. It takes a connectivity graph, assigns an activity variable to each included population, supplies visual-feature input, and calculates what happens next. You can then change the graph’s active populations and compare the outcomes.</p>
+<p>The question has two parts. First, where can an input influence motor activity under a chosen neural model? Second, what happens when those motor signals are connected to a body whose movement changes the next input? The site provides a separate experiment for each.</p>
+
+<h2 id="why-looming">Why use an approaching object?</h2>
+<p>An approaching object gives a clear input variable: angular size grows over time. Experiments on the fly giant-fiber pathway identify LC4 and LPLC2 as inputs contributing looming velocity and size information. This supports choosing those populations as entry points. <a href="https://pubmed.ncbi.nlm.nih.gov/30827912/">Ache et al., Current Biology (2019)</a>.</p>
+<p>Our implementation chooses simpler feature rules than that physiological work. In the arena, target distance, bearing, and approach velocity determine the injected signals. In the circuit experiment, a prescribed pulse drives the same selected types. The exact response curves in this app are model assumptions.</p>
+<div class="reader-note"><strong>The visible scene explains the input.</strong> The browser does not pass the scene’s rendered pixels through a simulated retina. It calculates geometric features and injects them at the selected visual populations.</div>
+
+<h2 id="two-experiments">Two related experiments</h2>
+<h3>Hold the input fixed: the circuit experiment</h3>
+<p>The {{CIRCUIT_NODES}}-population experiment applies a predetermined stimulus from 60 to 240 model ms, within a 600 ms run. Its input is unchanged by motor activity. That makes intact-versus-silenced comparisons easier to interpret: you can ask how a changed circuit responds to the same external protocol.</p>
+<p>For example, silence both DNp01 populations and examine TTMn activity. The dashed intact trace and solid intervention trace show the consequences of that change under the same settings. A difference is evidence of dependency within the model.</p>
+<h3>Let movement change input: the arena</h3>
+<p>The arena uses {{ARENA_NODES}} populations, adding wing motor units and their input context. It converts selected motor activity into launch, lift, thrust, and yaw. The resulting body position determines the next visual drive.</p>
+<p>This introduces a feedback effect. Silencing a neuron can change movement; altered movement can change sensory input; altered input can change many other neurons. The complete trajectory reflects all of those interactions.</p>
+<div class="try-this"><h3>Compare the two questions</h3><p>Use the circuit view for a fixed-input comparison and the arena for a body/environment feedback experiment.</p><a href="../?view=experiment">Open the circuit experiment</a><a href="../?view=world">Open the arena</a></div>
+
+<h2 id="digital-twin">In what sense is this a digital twin?</h2>
+<p>The model has a structural link to a real biological system: its included directed connections and synapse counts come from MaleCNS. It also has explicit state, dynamics, inputs, outputs, and interventions. These make it more useful for experimentation than an animation of a fly or a static connectivity diagram alone.</p>
+<p>Its correspondence to biology is strongest at the structural-data layer. The activity dynamics and motor-to-force transformation are uncalibrated. There is no live data feed from a fly, no parameter fitting to the measured responses of this specimen, and no held-out behavioral validation.</p>
+<p>A precise description is therefore <strong>a connectome-constrained computational model with illustrative embodiment</strong>. The word “twin” should not be read as a claim that the simulated fly reproduces a real individual’s behavior.</p>
+
+<h2 id="what-it-can-teach">What it can help you understand</h2>
+<ul><li><strong>Structure and dynamics play different roles.</strong> A connection tells us that an influence is possible; its effect also depends on activity, signs, timing, and the rest of the network.</li><li><strong>A motor signal has several downstream interpretations.</strong> A launch readout can remain after wing-power activity is removed, so jumping and powered travel can separate.</li><li><strong>Feedback changes a comparison.</strong> An intervention can indirectly change the fly’s future sensory experience.</li><li><strong>Model size matters.</strong> Cropping a network omits recurrent influence, even when the retained edges and their denominators are correct.</li><li><strong>Assumptions can be tested.</strong> A changed glutamate sign or lift gain can alter the output without changing measured synapse counts.</li></ul>
+
+<h2 id="what-counts-as-evidence">What would count as stronger evidence?</h2>
+<p>A reasonable next experiment would choose one visual input protocol, collect neural or behavioral recordings, fit a small set of uncertain parameters, and test the fitted model on different input conditions. The test conditions need to remain separate from fitting.</p>
+<p>Published connectome-based modeling offers a useful precedent: Shiu et al. studied sensorimotor processing with a different fly-brain model and experimental tests. Their validation applies to their dataset, equations, and experiments. It motivates a validation workflow for this project; it cannot validate these arena trajectories by association. <a href="https://www.nature.com/articles/s41586-024-07763-9">Shiu et al., Nature (2024)</a>.</p>
+<p>For now, the most defensible conclusions are about this implementation: which inputs activate which populations, what changes after a declared intervention, and which assumptions materially change a result. The next article explains how the data became that executable model.</p>

@@ -1,0 +1,50 @@
+<p class="lead">The fly’s movement comes from a repeated calculation: environment geometry produces input, the circuit updates, motor readouts produce forces, and the new pose changes the next input.</p>
+
+<h2 id="the-software-loop">The software loop</h2>
+<figure class="loop-figure"><ol class="feedback-steps"><li><strong>Sense</strong><span>Calculate size, expansion, and bearing.</span></li><li><strong>Propagate</strong><span>Update the signed rate network.</span></li><li><strong>Act</strong><span>Turn motor rates into body commands.</span></li><li><strong>Integrate</strong><span>Update velocity and position.</span></li></ol><figcaption>The new body state returns to Sense. Rendering reads the state after calculation; it does not determine the neural response.</figcaption></figure>
+<p>The body advances in 20 ms model steps. During each step, the sensory vector is held fixed while the neural network performs ten synchronous 2 ms updates. The motor adapter then reads the new activity and updates the body. Everything starts from zero activity and a resting pose.</p>
+<p>This is a closed loop because the next input depends on what the body just did. The target has a prescribed trajectory, but there is no prescribed fly trajectory or goal-seeking controller steering it around the target.</p>
+
+<h2 id="geometric-vision">Vision from geometry</h2>
+<p>The default target is a sphere of radius 1.25 arena units. Its x-coordinate follows <code>12 − 2.4t</code>, its height is 1.1, and its lateral offset selects frontal, left, or right approach. A stationary control keeps it at x=6.</p>
+<p>For distance d, radius R, and relative approach velocity v<sub>radial</sub>, the implementation calculates:</p>
+<div class="math-block" role="math" aria-label="Angular size equals two times arctangent of radius over distance. Expansion is the non-negative rate of change of angular size.">angular size = 2 atan2(R, d)<br>expansion = max(0, −2R v<sub>radial</sub> / (d² + R²))</div>
+<p>The expansion signal is scaled, clipped, and weighted by the target’s bearing. It is zero outside the forward field. Side-specific drive enters LC4; LPLC2 drive also receives an angular-size factor. The exact clipping and scaling rules are in the <a href="../EMBODIMENT.md">equation notes</a>.</p>
+<p>These rules are a feature-level approximation. They skip photoreceptors, individual ommatidia, within-type spatial structure, and image processing. The visual-field canvas is an explanation of the geometry, not the input image to a retina model.</p>
+
+<h2 id="motor-adapter">A small, explicit motor adapter</h2>
+<p>The updated network state contains activity for every included population. Three readouts connect it to the body:</p>
+<div class="reader-table"><table><thead><tr><th>Readout</th><th>Transformation</th><th>Body effect</th></tr></thead><tbody><tr><td>Mean bilateral TTMn</td><td>Crosses 0.008 while grounded, with more than 1 s since the previous launch.</td><td>Sets upward velocity to 4.2 au/s.</td></tr><tr><td>Mean DLMn/DVMn</td><td>p = tanh(mean activity / 0.018).</td><td>Scales lift and forward thrust.</td></tr><tr><td>b2 right minus left</td><td>q = tanh(activity difference / 0.008).</td><td>Scales yaw torque, together with power p.</td></tr></tbody></table></div>
+<p>The anatomy motivates separate launch and wing readouts: TTMn is associated with a jump muscle, DLM/DVM with wing power, and b2 with wing steering. hDVM denotes haltere power and is excluded from the lift readout. The particular thresholds, gains, timing, and yaw sign above are assumptions. <a href="https://elifesciences.org/articles/96084">Cheong et al., motor-circuit anatomy</a>.</p>
+<p>Each of the ten selected wing-power populations contributes equally to the mean. A population containing several neurons is still one contribution. No motor adapter reads the target’s position directly; environment influence passes through the sensory input and network first.</p>
+
+<h2 id="body-dynamics">Move the body with simple dynamics</h2>
+<p>The adapter combines motor commands with gravity and drag. For power p, yaw command q, lift multiplier L, and heading ψ, the acceleration rules are:</p>
+<pre><code>yaw acceleration = 6 q p − 3 yaw_rate
+forward thrust   = 7 p, once off the floor or launching
+x acceleration   = thrust cos(ψ) − 1.7 vx
+y acceleration   = thrust sin(ψ) − 1.7 vy
+z acceleration   = 20 L p − 9.8 − 1.1 vz</code></pre>
+<p>Velocities are updated before position. A floor, side walls, and ceiling constrain the state. The visual sphere has no collision force. The model omits muscle mechanics, aerodynamic wing forces, body collisions, airflow, and leg articulation.</p>
+<p>Distances are reported in arbitrary arena units. Although the display mesh is scaled to one nominal body length, the acceleration and time parameters are not calibrated to that physical scale. A reported model speed cannot be read as a measured fly speed.</p>
+<p>The rules also explain a potentially surprising outcome: wing lift can raise the body without a TTMn jump. Silencing DNp01 can therefore remove an early launch while leaving later body movement. That follows from the declared network and adapter; it is not proof of a biological alternative-takeoff mechanism.</p>
+
+<h2 id="anatomical-rendering">Draw the fly without confusing appearance with physics</h2>
+<p><a href="https://github.com/TuragaLab/flybody">Flybody</a> supplies an anatomical model designed for MuJoCo and locomotion research. The app reuses its geometry, pinned to a source commit and decimated to 81 pieces with 28,700 triangles. The original XML transforms are baked into a compact display asset.</p>
+<p>Three.js renders that asset at the computed pose. Wings have a deliberately slowed display oscillation whose amplitude follows the connected power command. This is not asynchronous muscle simulation. Flybody’s MuJoCo dynamics, aerodynamic model, and trained control policies are not executed by this site.</p>
+<p>The same computed state drives the body view, neural graph, numeric readouts, event list, and traces. The renderer can change cameras without changing the simulation. When 3D rendering is unavailable, a labeled 2D position view can still display the numerical result.</p>
+
+<h2 id="implementation-map">How the implementation is organized</h2>
+<div class="reader-table"><table><thead><tr><th>Source file in the repository</th><th>Responsibility</th></tr></thead><tbody><tr><td><code>python/prepare_graph.py</code></td><td>Download source tables, aggregate populations and counts, select the original subnetwork.</td></tr><tr><td><code>python/prepare_arena_graph.py</code></td><td>Add actual wing motor units and their input context.</td></tr><tr><td><code>dist/sim.mjs</code></td><td>Batch and stateful versions of the signed rate equation.</td></tr><tr><td><code>dist/sim.worker.mjs</code></td><td>Run the circuit experiment away from its interface thread.</td></tr><tr><td><code>dist/world-sim.mjs</code></td><td>Pure sensory, neural, motor, and body integration.</td></tr><tr><td><code>dist/world.mjs</code></td><td>Arena controls, recorded states, playback, readouts, and exports. It steps the compact model on the browser’s main thread.</td></tr><tr><td><code>dist/world-render.mjs</code></td><td>3D anatomy, cameras, trajectory, force indicators, and fallback view.</td></tr><tr><td><code>python/simulate_full.py</code></td><td>Sparse full typed-CNS propagation.</td></tr></tbody></table></div>
+<p>The prepared experiment runs locally in the browser after the assets load. It makes no model-server calls during a run and does not require a GPU service or an LLM. The Python scripts support data preparation and larger-scale experiments.</p>
+
+<h2 id="reproduce">Reproduce the arena without its interface</h2>
+<p>Clone <a href="https://github.com/Bhanu9Prakash/fly-cns-lab">the GitHub repository</a>. With Git and Node.js available, run:</p>
+<pre><code>git clone https://github.com/Bhanu9Prakash/fly-cns-lab.git
+cd fly-cns-lab
+node examples/run-arena.mjs
+node examples/run-arena.mjs power</code></pre>
+<p>The example imports the same graph and pure simulation used by the site. It prints maximum height above the floor and final horizontal displacement, so the comparison can be reproduced without depending on the rendering.</p>
+<p>To use the interactive site locally, serve its static directory with Python and open the local address printed by the server:</p>
+<pre><code>python -m http.server 8000 --directory dist</code></pre>
+<p>The README covers full-data preparation and sparse Python runs. The <a href="../EMBODIMENT.md">detailed model notes</a> list every geometric coefficient, boundary rule, and asset provenance record.</p>

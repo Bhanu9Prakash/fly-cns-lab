@@ -1,0 +1,154 @@
+{
+  "model": "leaky-rate-v1",
+  "scope": "Full typed, Traced CNS population graph",
+  "populations": 25850,
+  "neurons": 162517,
+  "edges": 6742293,
+  "elapsed_seconds": 3.046253276000243,
+  "options": {
+    "preset": "loom",
+    "side": "both",
+    "amplitude": 1,
+    "gain": 3,
+    "duration": 600,
+    "onset": 60,
+    "pulse": 180,
+    "dt": 2,
+    "tau": 20,
+    "mode": "signed",
+    "glutamate": "inhibitory",
+    "silenced": []
+  },
+  "active_above_0_001": 11475,
+  "top_motors": [
+    {
+      "key": "hDVM MN|L|T3",
+      "peak": 0.03854386293614423,
+      "peak_model_time": 270
+    },
+    {
+      "key": "hDVM MN|R|T3",
+      "peak": 0.03111611505541467,
+      "peak_model_time": 270
+    },
+    {
+      "key": "MNad28|L|T3",
+      "peak": 0.028658824808093255,
+      "peak_model_time": 272
+    },
+    {
+      "key": "hi1 MN|L|T3",
+      "peak": 0.02710012730137881,
+      "peak_model_time": 270
+    },
+    {
+      "key": "MNad28|R|T3",
+      "peak": 0.026455981624162725,
+      "peak_model_time": 272
+    },
+    {
+      "key": "TTMn|R|T2",
+      "peak": 0.024912419202191453,
+      "peak_model_time": 256
+    },
+    {
+      "key": "hi1 MN|R|T3",
+      "peak": 0.02223587211740847,
+      "peak_model_time": 272
+    },
+    {
+      "key": "GNG651|R|",
+      "peak": 0.021562692553229994,
+      "peak_model_time": 254
+    },
+    {
+      "key": "DLMn a, b|L|T2",
+      "peak": 0.021221183235023342,
+      "peak_model_time": 268
+    },
+    {
+      "key": "DVMn 2a, b|R|T2",
+      "peak": 0.02083405398004972,
+      "peak_model_time": 268
+    },
+    {
+      "key": "MNad03|R|A5",
+      "peak": 0.01998486249079717,
+      "peak_model_time": 280
+    },
+    {
+      "key": "DVMn 2a, b|L|T2",
+      "peak": 0.019894127729171755,
+      "peak_model_time": 270
+    }
+  ],
+  "comparison": [
+    {
+      "key": "TTMn|R|T2",
+      "subnetwork_peak": 0.03400844786707857,
+      "full_peak": 0.024912419202191453,
+      "subnetwork_vs_full_percent": 36.51202474983633,
+      "full_gf_silenced_peak": 0.00023144632640738813,
+      "full_lesion_change_percent": -99.07096005197668
+    },
+    {
+      "key": "TTMn|L|T2",
+      "subnetwork_peak": 0.015891260212699126,
+      "full_peak": 0.01073409361661747,
+      "subnetwork_vs_full_percent": 48.04473279511776,
+      "full_gf_silenced_peak": 0.001020431147134153,
+      "full_lesion_change_percent": -90.4935508895281
+    },
+    {
+      "key": "hDVM MN|L|T3",
+      "subnetwork_peak": 0.023850133526311573,
+      "full_peak": 0.03854386293614423,
+      "subnetwork_vs_full_percent": -38.12209854050129,
+      "full_gf_silenced_peak": 0.03732448102525405,
+      "full_lesion_change_percent": -3.163621438023312
+    },
+    {
+      "key": "hDVM MN|R|T3",
+      "subnetwork_peak": 0.019989095339727744,
+      "full_peak": 0.03111611505541467,
+      "subnetwork_vs_full_percent": -35.759668891411486,
+      "full_gf_silenced_peak": 0.030138468476500205,
+      "full_lesion_change_percent": -3.1419300808387396
+    },
+    {
+      "key": "DNg13|L|",
+      "subnetwork_peak": 0.0,
+      "full_peak": 0.00019669066472545788,
+      "subnetwork_vs_full_percent": -100.0,
+      "full_gf_silenced_peak": 0.00024979628734022187,
+      "full_lesion_change_percent": 26.999564361068764
+    },
+    {
+      "key": "DNg13|R|",
+      "subnetwork_peak": 0.0,
+      "full_peak": 0.0003404240314199576,
+      "subnetwork_vs_full_percent": -100.0,
+      "full_gf_silenced_peak": 0.00035362408125297324,
+      "full_lesion_change_percent": 3.877531729459971
+    }
+  ],
+  "full_no_input_control": "pass",
+  "note": "The omitted recurrent network changes activity and motor rankings. Subnetwork experiments are not quantitatively interchangeable with full-CNS results.",
+  "provenance": {
+    "annotations": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+      "bytes": 14483314
+    },
+    "nt": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+      "bytes": 43282834
+    },
+    "weights": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1",
+      "bytes": 1051241946
+    }
+  }
+}

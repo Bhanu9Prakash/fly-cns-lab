@@ -1,0 +1,646 @@
+{
+  "created": "2026-09-06",
+  "model": "fly-cns-embodiment-v1",
+  "default_settings": {
+    "dt": 0.02,
+    "duration": 12,
+    "scenario": "front",
+    "vision": true,
+    "motorConnected": true,
+    "intervention": "intact",
+    "inputGain": 1.5,
+    "liftGain": 1,
+    "gain": 3
+  },
+  "adapter": {
+    "powerScale": 0.018,
+    "yawScale": 0.008,
+    "jumpThreshold": 0.008,
+    "jumpVelocity": 4.2,
+    "gravity": 9.8,
+    "maxLift": 20,
+    "thrust": 7,
+    "drag": 1.7,
+    "verticalDrag": 1.1,
+    "yawTorque": 6,
+    "yawDrag": 3
+  },
+  "graph": {
+    "nodes": 526,
+    "edges": 14713,
+    "represented_neurons": 9615,
+    "represented_synapses": 2928216,
+    "base_graph_preserved": true,
+    "minimum_nt_agreement": 1
+  },
+  "checks": {
+    "graph_integrity": "pass",
+    "original_nodes_edges_and_denominators_preserved": "pass",
+    "stationary_target_negative_control": "pass",
+    "visual_input_negative_control": "pass",
+    "motor_disconnect_negative_control": "pass",
+    "motor_interventions": "pass",
+    "all_scenarios_finite_bounded": "pass"
+  },
+  "interpretation": "Numerical and structural checks only. Arbitrary arena units, unfitted sensory and body rules. No behavioral or physiological validation. Browser and visual QA not performed.",
+  "experiments": {
+    "intact": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 7.044391744249892,
+      "final_horizontal_displacement": 5.342685076328332,
+      "peak_wing_motor_activity": 0.017029150583065804,
+      "peak_jump_motor_activity": 0.02989595063658483,
+      "peak_abs_yaw_command": 0.09479760922242621,
+      "first_launch": 0.06,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 5.324982679641453,
+        "y": -0.43456102717571365,
+        "z": 0.45,
+        "vx": 2.354903205132087e-30,
+        "vy": -3.3021562990813113e-31,
+        "vz": 0,
+        "yaw": -0.22074611675337882,
+        "yawRate": -4.504875530866224e-15
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.06,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.86,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "giant_silenced": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "giant",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 5.244242993146558,
+      "final_horizontal_displacement": 5.857882595902532,
+      "peak_wing_motor_activity": 0.018223847555980385,
+      "peak_jump_motor_activity": 0.00992273487097887,
+      "peak_abs_yaw_command": 0.10319239245536214,
+      "first_launch": null,
+      "first_airborne": 0.52,
+      "final_pose": {
+        "x": 5.8289076508952595,
+        "y": -0.5819141729778514,
+        "z": 0.45,
+        "vx": 1.8986749300760415e-30,
+        "vy": -3.0692231180960764e-31,
+        "vz": 0,
+        "yaw": -0.2745741387882294,
+        "yawRate": -9.05142730558478e-15
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.52,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.78,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "wing_power_silenced": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "power",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 0.6410025584340469,
+      "final_horizontal_displacement": 0,
+      "peak_wing_motor_activity": 0,
+      "peak_jump_motor_activity": 0.03507340247258798,
+      "peak_abs_yaw_command": 0.09765690683325207,
+      "first_launch": 0.06,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 0,
+        "y": 0,
+        "z": 0.45,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.06,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 0.74,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 1.1,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 1.12,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 1.78,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 2.14,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 2.16,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 2.82,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 3.18,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 3.2,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.86,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 4.22,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 4.239999999999999,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 4.8999999999999995,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "steering_silenced": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "steering",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 7.140169070649425,
+      "final_horizontal_displacement": 5.369863496960235,
+      "peak_wing_motor_activity": 0.0173578302027055,
+      "peak_jump_motor_activity": 0.03099760682871932,
+      "peak_abs_yaw_command": 0,
+      "first_launch": 0.06,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 5.369863496960235,
+        "y": 0,
+        "z": 0.45,
+        "vx": 2.360483776525196e-30,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.06,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.88,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "all_readouts_silenced": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "motors",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 0,
+      "final_horizontal_displacement": 0,
+      "peak_wing_motor_activity": 0,
+      "peak_jump_motor_activity": 0,
+      "peak_abs_yaw_command": 0,
+      "first_launch": null,
+      "first_airborne": null,
+      "final_pose": {
+        "x": 0,
+        "y": 0,
+        "z": 0.45,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        }
+      ]
+    },
+    "vision_closed": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": false,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 0,
+      "final_horizontal_displacement": 0,
+      "peak_wing_motor_activity": 0,
+      "peak_jump_motor_activity": 0,
+      "peak_abs_yaw_command": 0,
+      "first_launch": null,
+      "first_airborne": null,
+      "final_pose": {
+        "x": 0,
+        "y": 0,
+        "z": 0.45,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": []
+    },
+    "motor_disconnected": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": false,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 0,
+      "final_horizontal_displacement": 0,
+      "peak_wing_motor_activity": 0.019003947024719824,
+      "peak_jump_motor_activity": 0.03507340251035282,
+      "peak_abs_yaw_command": 0.09765718337287228,
+      "first_launch": null,
+      "first_airborne": null,
+      "final_pose": {
+        "x": 0,
+        "y": 0,
+        "z": 0.45,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        }
+      ]
+    },
+    "stationary_target": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "static",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 0,
+      "final_horizontal_displacement": 0,
+      "peak_wing_motor_activity": 0,
+      "peak_jump_motor_activity": 0,
+      "peak_abs_yaw_command": 0,
+      "first_launch": null,
+      "first_airborne": null,
+      "final_pose": {
+        "x": 0,
+        "y": 0,
+        "z": 0.45,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "yaw": 0,
+        "yawRate": 0
+      },
+      "events": []
+    },
+    "left_target": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "left",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 6.029587643047343,
+      "final_horizontal_displacement": 5.594341731498378,
+      "peak_wing_motor_activity": 0.014873321858825048,
+      "peak_jump_motor_activity": 0.023379044331267695,
+      "peak_abs_yaw_command": 0.1195538283896731,
+      "first_launch": 0.08,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 5.566166660957275,
+        "y": -0.5607567308842748,
+        "z": 0.45,
+        "vx": 9.085743593154925e-30,
+        "vy": -1.7262641677275606e-30,
+        "vz": 0,
+        "yaw": -0.268124337273053,
+        "yawRate": -1.729123593593222e-14
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.08,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 4,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "right_target": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "right",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 1,
+        "gain": 3
+      },
+      "max_height_above_floor": 6.64219362917003,
+      "final_horizontal_displacement": 5.505296448290915,
+      "peak_wing_motor_activity": 0.016510953363528744,
+      "peak_jump_motor_activity": 0.030178154598834425,
+      "peak_abs_yaw_command": 0.08448110277996299,
+      "first_launch": 0.08,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 5.491755337553889,
+        "y": -0.385891559914093,
+        "z": 0.45,
+        "vx": 5.2548258950673985e-30,
+        "vy": -6.476599762903745e-31,
+        "vz": 0,
+        "yaw": -0.17703302692683945,
+        "yawRate": -3.145659008437784e-15
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.08,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.96,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "zero_lift": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 0,
+        "gain": 3
+      },
+      "max_height_above_floor": 0.6410025584340469,
+      "final_horizontal_displacement": 4.084328948737259,
+      "peak_wing_motor_activity": 0.01853087625735348,
+      "peak_jump_motor_activity": 0.03358267694242595,
+      "peak_abs_yaw_command": 0.12989304155291526,
+      "first_launch": 0.06,
+      "first_airborne": 0.08,
+      "final_pose": {
+        "x": 4.0260601856382,
+        "y": -0.6874462474347406,
+        "z": 0.45,
+        "vx": 9.209379341014655e-30,
+        "vy": -3.793365975116929e-30,
+        "vz": 0,
+        "yaw": -0.4589694465770529,
+        "yawRate": -3.972758844886063e-13
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.06,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.08,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 0.74,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 1.1,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 1.12,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 1.78,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 2.14,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 2.16,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 2.82,
+          "label": "Body returns to the floor"
+        },
+        {
+          "t": 3.18,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 3.2,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 3.86,
+          "label": "Body returns to the floor"
+        }
+      ]
+    },
+    "double_lift": {
+      "settings": {
+        "dt": 0.02,
+        "duration": 12,
+        "scenario": "front",
+        "vision": true,
+        "motorConnected": true,
+        "intervention": "intact",
+        "inputGain": 1.5,
+        "liftGain": 2,
+        "gain": 3
+      },
+      "max_height_above_floor": 9.35666657847816,
+      "final_horizontal_displacement": 3.182196911418412,
+      "peak_wing_motor_activity": 0.013040710816564946,
+      "peak_jump_motor_activity": 0.021228078497666128,
+      "peak_abs_yaw_command": 0.08043879461991855,
+      "first_launch": 0.06,
+      "first_airborne": 0.06,
+      "final_pose": {
+        "x": 3.1798220653307436,
+        "y": -0.12291792333343673,
+        "z": 0.45,
+        "vx": 5.965126277003639e-29,
+        "vy": -4.09312556241287e-30,
+        "vz": 0,
+        "yaw": -0.08687046789431807,
+        "yawRate": -2.907007032857435e-15
+      },
+      "events": [
+        {
+          "t": 0,
+          "label": "Visual feature input begins"
+        },
+        {
+          "t": 0.06,
+          "label": "TTMn crosses the assumed launch threshold"
+        },
+        {
+          "t": 0.06,
+          "label": "Body leaves the floor"
+        },
+        {
+          "t": 4.3999999999999995,
+          "label": "Body returns to the floor"
+        }
+      ]
+    }
+  }
+}

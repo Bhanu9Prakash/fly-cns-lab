@@ -1,0 +1,7 @@
+Flybody anatomical display geometry
+Source: https://github.com/TuragaLab/flybody
+Commit: d015e9bfe441bd90ae431bac24c55cb74bdbce26
+Google DeepMind and HHMI Janelia Research Campus. Apache License 2.0.
+Vaxenburg et al. (2025), Whole-body physics simulation of fruit fly locomotion, Nature 643, 1312–1320. https://doi.org/10.1038/s41586-025-09029-4
+Modifications: Decimated; four fine-detail meshes omitted; XML zero-joint transforms baked; scaled to 1 body length. Display geometry only.
+The CNS Lab does not run the source MuJoCo dynamics or trained controller.

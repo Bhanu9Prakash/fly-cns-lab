@@ -1,0 +1,46 @@
+<p class="lead">A moving fly is an output to explain. The useful result is the relationship between input, neural activity, an intervention, and the assumptions that turn activity into movement.</p>
+
+<h2 id="baseline">Establish a baseline before interpreting a change</h2>
+<p>Start with the frontal target, intact circuit, visual input on, motor output connected, and lift strength 1.0×. Complete or export that run before changing a setting. Then change one factor and repeat.</p>
+<p>Record the question as well as the result. For example: “Does wing-power activity account for forward powered travel in this adapter?” is a testable question. “Does the fly look realistic?” does not identify which model component should be checked.</p>
+<p>The table below is generated from the project’s recorded arena-validation file. Values belong to the default 12-model-second protocol and use arbitrary arena units.</p>
+<div class="reader-table"><table><caption>Reference model runs; these are simulated quantities, without biological calibration.</caption><thead><tr><th>Condition</th><th>Maximum height above floor (au)</th><th>Final horizontal displacement (au)</th><th>First threshold launch (model s)</th></tr></thead><tbody>{{ARENA_RESULTS_ROWS}}</tbody></table></div>
+<p>Displacement is the straight-line distance from the starting point to the final horizontal position, not the total length of the trajectory. “None” means the assumed jump threshold did not trigger a grounded launch; it does not mean the body never left the floor.</p>
+<p><a href="../arena-validation.json" download>Download the recorded settings, events, and full reference summaries</a>.</p>
+
+<h2 id="intervention-meaning">What each intervention actually tests</h2>
+<h3>Wing power silenced</h3>
+<p>DLM/DVM rates are clamped to zero, so the power transformation returns zero. TTMn can still exceed its launch threshold and give a short jump. This separates two modeled output functions: a launch impulse and powered lift/thrust.</p>
+<h3>Motor output disconnected</h3>
+<p>The graph continues calculating activity, including motor readouts. The body adapter receives no powered commands. This is a useful check that the target’s animation is not directly pushing the body.</p>
+<h3>Visual input closed or target stationary</h3>
+<p>The resting model has no baseline spontaneous drive. Closing vision supplies no external input. A stationary target also produces no expansion for the resting body. Both conditions therefore remain silent and grounded under these equations.</p>
+<h3>DNp01 silenced</h3>
+<p>The early threshold launch disappears in the recorded default run, but the body can still rise later through the wing-power adapter. This does not establish an experimentally verified alternative pathway. It tells us to inspect the remaining network routes and the rule allowing lift without a jump.</p>
+<h3>Steering readout silenced</h3>
+<p>Both b2 rates become zero, so their right-minus-left difference and the adapter’s yaw command vanish. Other wing motor neurons and their mechanics are not substituted as steering outputs in this simplified adapter.</p>
+<div class="try-this"><h3>Separate activity from movement</h3><p>Run the motor-disconnection control and watch the neural readouts beside the resting body.</p><a href="../?view=world&amp;motor=off">Open the disconnected setup</a><a href="../guide.html#experiments">See all suggested comparisons</a></div>
+
+<h2 id="feedback">Remember that the input can change too</h2>
+<p>Two arena runs begin with the same target motion and fly pose. After an intervention changes the fly’s movement, each fly experiences a different relative target position and velocity. Its later sensory drive can therefore differ.</p>
+<p>A difference in a late neural trace can include both a direct network effect and an indirect feedback effect through movement. The recorded experiment does not automatically separate them. If your question requires the same input in both runs, begin with the fixed-input <a href="../?view=experiment">circuit experiment</a>.</p>
+<p>This is also why a greater maximum height need not produce greater horizontal displacement. In the reference runs, increasing the assumed lift strength changes the trajectory and subsequent sensory drive. The body and input histories evolve together.</p>
+
+<h2 id="common-mistakes">Four easy misreadings</h2>
+<dl class="glossary"><dt>“The bright node must dominate behavior.”</dt><dd>Color uses a logarithmic scale and the body reads only specified outputs. Inspect exact activity, connection weights, and the chosen readout mapping.</dd><dt>“0.5 activity means a 50% chance of escape.”</dt><dd>Activity is a normalized state variable. No probability-of-escape model is fitted here.</dd><dt>“A drawn path proves a real individual-neuron route.”</dt><dd>The display is a population graph. Pooling can connect successive edges that belong to different individual neurons within a type.</dd><dt>“A plausible flight proves the connectome model is correct.”</dt><dd>The trajectory depends on unfitted sensory features, rate dynamics, readout scales, and forces. Similar movement can arise from different combinations of these choices.</dd></dl>
+
+<h2 id="cropping">Cropping changes the answer</h2>
+<p>The original 414-unit looming run and the full typed-CNS run use the same rate equation and prescribed input. They nevertheless produce different responses because the larger graph includes additional recurrent and indirect influences.</p>
+<p>For right TTMn, the original subnetwork’s recorded peak is 0.034008, compared with 0.024912 in the full typed model, a roughly 36.5% overestimate relative to the full result. Those values belong to the original fixed-input experiment, not the arena. <a href="../full-cns-validation.json" download>Inspect the full-CNS comparison</a>.</p>
+<p>Preserving each target’s original input denominator prevents one artificial source of strengthening after cropping. It cannot restore omitted activity. The smaller model is useful for interactive experiments, but its outputs need comparison with a larger model before quantitative conclusions are carried across scales.</p>
+
+<h2 id="verification">What has been verified?</h2>
+<p>The project includes checks for graph integrity, preserved original edges and input totals, zero-input silence, directed propagation, silencing, bounded activity, deterministic trajectories, and agreement between numerical implementations. Arena checks cover multiple scenarios and motor interventions.</p>
+<p>These are implementation and structural checks. They do not measure agreement with neural recordings, muscle forces, real flight trajectories, or intervention experiments in animals. Browser visual and end-to-end testing were not performed during construction; numerical tests do not certify the appearance on every device.</p>
+<p>You can run the checks from the downloaded package:</p>
+<pre><code>node --test tests/*.test.mjs
+node tests/validate_arena.mjs</code></pre>
+
+<h2 id="next-experiments">How to turn an observation into a better next experiment</h2>
+<ol class="numbered-steps"><li><strong>Name the output.</strong> Choose a motor peak, onset, launch event, or trajectory statistic.</li><li><strong>Identify the uncertain layer.</strong> Ask whether the effect depends on graph cropping, transmitter signs, neural dynamics, sensory features, or the body adapter.</li><li><strong>Vary that layer deliberately.</strong> Preserve other settings and record a comparison. Avoid fitting many parameters to one appealing trajectory.</li><li><strong>Seek independent measurements.</strong> Fit against one set of recordings, then evaluate on held-out inputs or interventions.</li></ol>
+<p>The model is most useful when a surprising output leads to a sharper question about the circuit or its assumptions. The <a href="../guide.html">user guide</a> provides the controls for beginning that process.</p>
